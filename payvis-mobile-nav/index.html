@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAYVIS · 결제의 모든 것</title>
+<meta name="description" content="결제단말기, POS, 키오스크, 테이블오더까지. 페이비스는 비즈니스 규모에 맞는 결제 인프라를 제공합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/common.css">
+<style>
+  /* HERO */
+  .hero{padding:140px 0 100px;text-align:center;position:relative;overflow:hidden}
+  .hero-bg{position:absolute;top:0;left:50%;transform:translateX(-50%);width:1200px;height:600px;background:radial-gradient(ellipse at center,rgba(49,130,246,0.12) 0%,rgba(49,130,246,0) 60%);pointer-events:none;z-index:0}
+  .hero-inner{position:relative;z-index:1}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:white;border:1px solid var(--line);border-radius:999px;font-size:13px;font-weight:600;color:var(--ink-2);box-shadow:var(--shadow-sm);margin-bottom:28px}
+  .hero-badge .dot{width:8px;height:8px;background:var(--pv-mint);border-radius:50%}
+  .hero h1{font-size:clamp(40px,6.5vw,64px);line-height:1.1;letter-spacing:-0.04em;font-weight:800;margin-bottom:24px}
+  .hero h1 .accent{color:var(--pv-blue)}
+  .hero p.lede{font-size:clamp(17px,2vw,20px);color:var(--ink-2);max-width:640px;margin:0 auto 40px;line-height:1.6}
+  .hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+  /* DEVICE ROW */
+  .devices-section{padding:60px 0 100px;background:linear-gradient(180deg,#F9FAFB 0%,#FFFFFF 100%)}
+  .devices-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+  .device-card{background:#000000;border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-lg);padding:32px 18px;text-align:center;transition:all .3s;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+  .device-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(49,130,246,0.15) 0%,transparent 70%);opacity:0;transition:opacity .4s}
+  .device-card:hover{border-color:rgba(49,130,246,0.5);transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.2)}
+  .device-card:hover::before{opacity:1}
+  .device-img-wrap{width:100%;height:110px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;position:relative;z-index:1}
+  .device-img-wrap img{max-width:85%;max-height:100%;object-fit:contain;filter:drop-shadow(0 6px 16px rgba(0,0,0,0.3))}
+  .device-name{font-size:14px;font-weight:700;color:#FFFFFF;margin-bottom:5px;position:relative;z-index:1;letter-spacing:-0.01em}
+  .device-desc{font-size:12px;color:rgba(255,255,255,0.65);position:relative;z-index:1}
+  @media (max-width:720px){.devices-row{grid-template-columns:repeat(2,1fr);gap:14px}.device-img-wrap{height:100px}}
+
+  /* SOLUTIONS */
+  .solutions{padding:100px 0;background:var(--bg)}
+  .solutions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px}
+  .solutions-grid .row-2{display:contents}
+  .sol-card{background:white;border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px;transition:all .25s;display:flex;flex-direction:column;height:100%}
+  .sol-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:transparent}
+  .sol-icon-wrap{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:28px;margin-bottom:20px}
+  .sol-card.ind .sol-icon-wrap{background:var(--pv-blue-soft)}
+  .sol-card.fra .sol-icon-wrap{background:var(--pv-mint-soft)}
+  .sol-card.med .sol-icon-wrap{background:#FFE5E5}
+  .sol-card.spec .sol-icon-wrap{background:#FFF4D6}
+  .sol-card.inv .sol-icon-wrap{background:#F0EDFE}
+
+  .sol-tag{display:inline-block;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;margin-bottom:12px;align-self:flex-start;letter-spacing:0.04em}
+  .sol-card.ind .sol-tag{background:var(--pv-blue-soft);color:var(--pv-blue)}
+  .sol-card.fra .sol-tag{background:var(--pv-mint-soft);color:var(--pv-mint)}
+  .sol-card.med .sol-tag{background:#FFE5E5;color:var(--pv-coral)}
+  .sol-card.spec .sol-tag{background:#FFF4D6;color:#B47800}
+  .sol-card.inv .sol-tag{background:#F0EDFE;color:var(--pv-purple)}
+
+  .sol-card h3{font-size:20px;font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;line-height:1.3}
+  .sol-card p.sol-desc{font-size:14px;color:var(--ink-2);line-height:1.6;margin-bottom:20px;flex-grow:1}
+  .sol-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--pv-blue);transition:gap .2s}
+  .sol-link:hover{gap:10px}
+  .sol-card.fra .sol-link{color:var(--pv-mint)}
+  .sol-card.med .sol-link{color:var(--pv-coral)}
+  .sol-card.spec .sol-link{color:#B47800}
+  .sol-card.inv .sol-link{color:var(--pv-purple)}
+
+  @media (max-width:880px){.solutions-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:540px){.solutions-grid{grid-template-columns:1fr}}
+
+  /* TRUST STATS */
+  .trust{padding:80px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center}
+  .trust-num{font-size:clamp(32px,4vw,44px);font-weight:800;color:var(--pv-blue);letter-spacing:-0.03em;line-height:1;margin-bottom:8px}
+  .trust-label{font-size:14px;color:var(--ink-3);font-weight:500}
+  @media (max-width:720px){.trust-grid{grid-template-columns:repeat(2,1fr);gap:30px}}
+
+  /* WHY */
+  .why{padding:100px 0}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px}
+  .why-card{background:var(--bg);border-radius:var(--radius-lg);padding:32px}
+  .why-icon{width:48px;height:48px;border-radius:12px;background:white;display:grid;place-items:center;font-size:24px;margin-bottom:18px;box-shadow:var(--shadow-sm)}
+  .why-card h4{font-size:18px;font-weight:800;margin-bottom:10px;letter-spacing:-0.01em}
+  .why-card p{font-size:14px;color:var(--ink-2);line-height:1.6}
+  @media (max-width:780px){.why-grid{grid-template-columns:1fr}}
+
+  /* CTA */
+  .cta-section{padding:100px 0}
+  .cta-box{background:var(--ink);border-radius:var(--radius-xl);padding:80px 40px;text-align:center;color:white;position:relative;overflow:hidden}
+  .cta-box::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;background:var(--pv-blue);border-radius:50%;opacity:.2;filter:blur(40px)}
+  .cta-box>*{position:relative;z-index:1}
+  .cta-box h2{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-0.03em;line-height:1.2;margin-bottom:16px}
+  .cta-box p{font-size:16px;opacity:.8;margin-bottom:32px;line-height:1.6}
+  .cta-box .btn-primary{background:white;color:var(--ink)}
+  .cta-box .btn-primary:hover{background:var(--pv-blue);color:white}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="/" class="logo">
+      <img src="assets/payvis-logo.png" alt="PAYVIS" style="height:24px">
+    </a>
+    <div class="nav-links">
+      <a href="/individual/">개인 가맹점</a>
+      <a href="/franchise/">프랜차이즈</a>
+      <a href="/medical/">의료기관</a>
+      <a href="/specialized/">골프·헬스·뷰티</a>
+      <a href="/invest/">투자</a>
+    </div>
+    <a href="#contact" class="nav-cta">도입 문의</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-inner">
+    <div class="hero-badge fade-up"><span class="dot"></span>VAN · PG · POS 통합 결제 솔루션</div>
+    <h1 class="fade-up d1">결제의 <span class="accent">모든 것</span>,<br>페이비스 하나로</h1>
+    <p class="lede fade-up d2">
+      결제단말기부터 키오스크, 테이블오더까지.<br>
+      비즈니스 규모와 업종에 딱 맞는 결제 인프라를 제안합니다.
+    </p>
+    <div class="hero-ctas fade-up d3">
+      <a href="#solutions" class="btn-primary">솔루션 둘러보기 →</a>
+      <a href="#contact" class="btn-ghost">상담 받기</a>
+    </div>
+  </div>
+</section>
+
+<section class="devices-section">
+  <div class="container">
+    <div class="devices-row">
+      <div class="device-card">
+        <div class="device-img-wrap"><img src="assets/device-cat.png" alt="카드단말기"></div>
+        <div class="device-name">결제 단말기</div>
+        <div class="device-desc">CAT · IC 신용승인</div>
+      </div>
+      <div class="device-card">
+        <div class="device-img-wrap"><img src="assets/device-pos.png" alt="POS"></div>
+        <div class="device-name">POS</div>
+        <div class="device-desc">통합 매장 관리</div>
+      </div>
+      <div class="device-card">
+        <div class="device-img-wrap"><img src="assets/device-multipad.png" alt="멀티패드"></div>
+        <div class="device-name">멀티패드</div>
+        <div class="device-desc">서명 · 광고 디스플레이</div>
+      </div>
+      <div class="device-card">
+        <div class="device-img-wrap"><img src="assets/device-tableorder.png" alt="테이블오더"></div>
+        <div class="device-name">테이블오더</div>
+        <div class="device-desc">QR · 태블릿 주문</div>
+      </div>
+      <div class="device-card">
+        <div class="device-img-wrap"><img src="assets/device-kiosk.png" alt="키오스크"></div>
+        <div class="device-name">키오스크</div>
+        <div class="device-desc">셀프 주문 결제</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="solutions" id="solutions">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Solutions</span>
+      <h2 class="section-title">업종에 딱 맞는<br>결제 솔루션을 선택하세요</h2>
+      <p class="section-sub">개인 가맹점부터 대형 프랜차이즈, 의료기관, 봉사료 업종까지. 페이비스는 산업별 특화 결제 인프라를 제공합니다.</p>
+    </div>
+
+    <div class="solutions-grid">
+      <a href="/individual/" class="sol-card ind">
+        <div class="sol-icon-wrap">🏬</div>
+        <span class="sol-tag">INDIVIDUAL</span>
+        <h3>개인 가맹점</h3>
+        <p class="sol-desc">결제단말기, POS, 키오스크, 테이블오더까지. 네이버페이·토스 등 모든 간편결제 대응 가능한 올인원 솔루션.</p>
+        <span class="sol-link">자세히 보기 →</span>
+      </a>
+
+      <a href="/franchise/" class="sol-card fra">
+        <div class="sol-icon-wrap">🏢</div>
+        <span class="sol-tag">FRANCHISE</span>
+        <h3>프랜차이즈 가맹점</h3>
+        <p class="sol-desc">수천 개 지점에서 동시 운영 가능한 안정적인 결제 네트워크. 통합 매출 관리와 본사 대시보드 제공.</p>
+        <span class="sol-link">자세히 보기 →</span>
+      </a>
+
+      <a href="/medical/" class="sol-card med">
+        <div class="sol-icon-wrap">🏥</div>
+        <span class="sol-tag">MEDICAL</span>
+        <h3>의료기관</h3>
+        <p class="sol-desc">해외카드 수수료 2.8%, 업계 최저 수준. 강남 성형·피부과 다수 도입. 외국인 환자 결제 최적화.</p>
+        <span class="sol-link">자세히 보기 →</span>
+      </a>
+
+      <a href="/specialized/" class="sol-card spec">
+        <div class="sol-icon-wrap">⛳</div>
+        <span class="sol-tag">CC · GYM · BEAUTY</span>
+        <h3>골프·헬스·뷰티</h3>
+        <p class="sol-desc">봉사료 분리결제 특허(10-1489403호). 부가세 면세를 합법적으로 구현하는 유일한 솔루션.</p>
+        <span class="sol-link">자세히 보기 →</span>
+      </a>
+
+      <a href="/invest/" class="sol-card inv">
+        <div class="sol-icon-wrap">📈</div>
+        <span class="sol-tag">INVESTMENT</span>
+        <h3>투자 사업</h3>
+        <p class="sol-desc">결제 인프라를 넘어, 부동산 개발과 산업단지 투자까지. 페이비스 인베스트먼트 사업 부문.</p>
+        <span class="sol-link">자세히 보기 →</span>
+      </a>
+
+      <div class="sol-card" style="background:linear-gradient(135deg,#3182F6 0%,#1B64DA 100%);border:none;color:white;justify-content:center;align-items:flex-start">
+        <div style="font-size:13px;font-weight:700;letter-spacing:0.1em;opacity:.85;margin-bottom:10px">CONTACT</div>
+        <h3 style="color:white;font-size:24px;margin-bottom:8px">잘 모르겠다면?</h3>
+        <p style="color:rgba(255,255,255,0.9);font-size:14px;line-height:1.6;margin-bottom:20px">담당자가 직접 방문해<br>업종에 맞는 솔루션을 제안드립니다.</p>
+        <a href="tel:1533-1050" style="background:white;color:var(--pv-blue);padding:10px 18px;border-radius:10px;font-weight:700;font-size:14px;display:inline-block">📞 1533-1050</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="container trust-grid">
+    <div><div class="trust-num">9년+</div><div class="trust-label">결제 시스템 운영</div></div>
+    <div><div class="trust-num">8개</div><div class="trust-label">VAN 협력사</div></div>
+    <div><div class="trust-num">5개</div><div class="trust-label">PG 협력사</div></div>
+    <div><div class="trust-num">전국</div><div class="trust-label">A/S 인프라</div></div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow mint">Why Payvis</span>
+      <h2 class="section-title">왜 페이비스를 선택할까요?</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🔗</div>
+        <h4>VAN·PG 통합 운영</h4>
+        <p>8개 VAN사와 5개 PG사의 총판으로, 가맹점 환경에 최적화된 결제 라우팅을 제공합니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📜</div>
+        <h4>특허받은 결제 기술</h4>
+        <p>봉사료 분리결제 특허(10-1489403호)로 봉사료 업종의 합법적 부가세 면세를 구현합니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🛠️</div>
+        <h4>전국 A/S 인프라</h4>
+        <p>서울·영남 지사와 영동·호남·제주 협력업체로 전국 어디든 신속하게 대응합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-box">
+      <h2>비즈니스에 맞는 결제 솔루션,<br>지금 바로 상담받으세요</h2>
+      <p>업종과 규모에 맞춰 최적의 결제 인프라를 제안해드립니다.</p>
+      <a href="tel:1533-1050" class="btn-primary">📞 1533-1050 상담하기</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <img src="assets/payvis-logo.png" alt="PAYVIS" style="height:20px">
+        </a>
+        <p>결제의 모든 것을 책임지는 PAYMENT SERVICE PROVIDERS. 비즈니스 규모와 업종에 맞는 결제 인프라를 제공합니다.</p>
+      </div>
+      <div class="footer-col">
+        <h4>솔루션</h4>
+        <ul>
+          <li><a href="/individual/">개인 가맹점</a></li>
+          <li><a href="/franchise/">프랜차이즈</a></li>
+          <li><a href="/medical/">의료기관</a></li>
+          <li><a href="/specialized/">골프·헬스·뷰티</a></li>
+          <li><a href="/invest/">투자 사업</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>회사</h4>
+        <ul>
+          <li><a href="#">회사 소개</a></li>
+          <li><a href="#">연혁</a></li>
+          <li><a href="#">협력사</a></li>
+          <li><a href="#">A/S 신청</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>고객지원</h4>
+        <ul>
+          <li><a href="tel:1533-1050">1533-1050</a></li>
+          <li><a href="mailto:support@payvis.co.kr">이메일 문의</a></li>
+          <li><a href="#contact">도입 상담</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="biz-info">
+        주식회사 페이비스 · 사업자등록번호 660-86-02371<br>
+        서울본사 강남구 강남대로 136길 11 · 영남지사 부산 해운대구 해운대로 723<br>
+        © 2026 PAYVIS Inc. All rights reserved.
+      </div>
+      <div>이용약관 · 개인정보처리방침</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 10));
+</script>
+</body>
+</html>
