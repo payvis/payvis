@@ -37,10 +37,10 @@
   /* INTEGRATIONS */
   .integrations{padding:100px 0;background:var(--bg)}
   .integ-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:50px}
-  .integ-card{background:white;border-radius:var(--radius-lg);padding:36px;border:1px solid var(--line);transition:all .2s}
-  .integ-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:transparent}
-  .integ-badge{display:inline-block;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--bg-2);color:var(--ink-2);margin-bottom:14px;letter-spacing:0.05em}
-  .integ-card h3{font-size:22px;font-weight:800;margin-bottom:10px;letter-spacing:-0.02em}
+  .integ-card{background:linear-gradient(135deg,#F0F9FF 0%,#E0F2FE 100%);border-radius:var(--radius-lg);padding:36px;border:1px solid rgba(49,130,246,0.15);transition:all .2s}
+  .integ-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(49,130,246,0.12);border-color:rgba(49,130,246,0.3)}
+  .integ-badge{display:inline-block;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;background:rgba(49,130,246,0.15);color:var(--pv-blue);margin-bottom:14px;letter-spacing:0.05em}
+  .integ-card h3{font-size:22px;font-weight:800;margin-bottom:10px;letter-spacing:-0.02em;color:var(--ink)}
   .integ-card p{font-size:14px;color:var(--ink-2);line-height:1.65}
   .integ-logo{display:inline-block;font-weight:900;letter-spacing:-0.02em;font-size:22px;margin-bottom:10px}
   .integ-card.npay .integ-logo{color:#03C75A}
@@ -62,7 +62,7 @@
 
 <nav class="nav" id="nav">
   <div class="container nav-inner">
-    <a href="/" class="logo">
+    <a href="../" class="logo">
       <img src="../assets/payvis-logo.png" alt="PAYVIS" style="height:24px">
     </a>
     <div class="nav-links">
@@ -184,19 +184,19 @@
     </div>
     <div class="integ-grid">
       <div class="integ-card npay">
-        <span class="integ-badge">CONNECT</span>
+        <span class="integ-badge">N PAY CONNECT</span>
         <div style="margin-bottom:16px">
-          <img src="../assets/npay-connect.jpg" alt="N pay Connect" style="max-width:280px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.12)">
+          <img src="../assets/npay-connect.jpg" alt="N Pay Connect" style="max-width:280px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.12)">
         </div>
-        <h3>네이버페이 NPay Connect</h3>
+        <h3>네이버페이 N Pay Connect</h3>
         <p>네이버페이 가맹점 등록 없이도, 페이비스 단말기에서 네이버페이 결제를 받을 수 있습니다. 스마트스토어 매장 운영에 최적화.</p>
       </div>
       <div class="integ-card toss">
-        <span class="integ-badge">FRONT</span>
+        <span class="integ-badge">TOSS FRONT 2</span>
         <div style="margin-bottom:16px">
-          <img src="../assets/toss-front.png" alt="Toss Front" style="max-width:280px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.12)">
+          <img src="../assets/toss-front.png" alt="Toss Front 2" style="max-width:280px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.12)">
         </div>
-        <h3>토스 Toss Front</h3>
+        <h3>토스 Toss Front 2</h3>
         <p>토스페이 결제를 매장 단말기에서 직접 처리. 추가 장비 없이 기존 페이비스 단말기로 토스 결제 인프라를 활용합니다.</p>
       </div>
     </div>
@@ -217,7 +217,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="/" class="logo">
+        <a href="../" class="logo">
           <img src="../assets/payvis-logo.png" alt="PAYVIS" style="height:20px">
         </a>
         <p>결제의 모든 것을 책임지는 PAYMENT SERVICE PROVIDERS.</p>
