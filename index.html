@@ -84,6 +84,20 @@
 
   /* CTA */
   .cta-section{padding:100px 0}
+
+  /* PARTNERS */
+  .partners{padding:100px 0;background:var(--bg)}
+  .partner-category{margin-bottom:50px}
+  .partner-category:last-child{margin-bottom:0}
+  .partner-cat-title{font-size:18px;font-weight:800;color:var(--ink);margin-bottom:24px;display:flex;align-items:center;gap:10px}
+  .partner-cat-title .count{font-size:14px;font-weight:600;color:var(--pv-blue);background:var(--pv-blue-soft);padding:4px 12px;border-radius:8px}
+  .partner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .partner-item{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:20px 16px;text-align:center;font-size:14px;font-weight:600;color:var(--ink);transition:all .2s}
+  .partner-item:hover{border-color:var(--pv-blue);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+  @media (max-width:720px){.partner-grid{grid-template-columns:repeat(2,1fr)}}
+
+  /* CTA */
+  .cta-section{padding:100px 0}
   .cta-box{background:var(--ink);border-radius:var(--radius-xl);padding:80px 40px;text-align:center;color:white;position:relative;overflow:hidden}
   .cta-box::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;background:var(--pv-blue);border-radius:50%;opacity:.2;filter:blur(40px)}
   .cta-box>*{position:relative;z-index:1}
@@ -100,12 +114,17 @@
     <a href="/" class="logo">
       <img src="assets/payvis-logo.png" alt="PAYVIS" style="height:24px">
     </a>
+    <button class="nav-toggle" aria-label="메뉴">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <div class="nav-links">
-      <a href="/individual/">개인 가맹점</a>
-      <a href="/franchise/">프랜차이즈</a>
-      <a href="/medical/">의료기관</a>
-      <a href="/specialized/">골프·헬스·뷰티</a>
-      <a href="/invest/">투자</a>
+      <a href="individual/">개인 가맹점</a>
+      <a href="franchise/">프랜차이즈</a>
+      <a href="medical/">의료기관</a>
+      <a href="specialized/">골프·헬스·뷰티</a>
+      <a href="invest/">투자</a>
     </div>
     <a href="#contact" class="nav-cta">도입 문의</a>
   </div>
@@ -253,6 +272,50 @@
   </div>
 </section>
 
+<section class="partners">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Partners</span>
+      <h2 class="section-title">페이비스와 함께하는<br>신뢰받는 파트너사</h2>
+    </div>
+    
+    <div class="partner-category">
+      <h3 class="partner-cat-title">VAN 협력사 <span class="count">8개사</span></h3>
+      <div class="partner-grid">
+        <div class="partner-item">KIS정보통신</div>
+        <div class="partner-item">KPN</div>
+        <div class="partner-item">다우데이터</div>
+        <div class="partner-item">KSNET</div>
+        <div class="partner-item">KOVAN</div>
+        <div class="partner-item">Secta9ine</div>
+        <div class="partner-item">NICE정보통신</div>
+        <div class="partner-item">KICC</div>
+      </div>
+    </div>
+
+    <div class="partner-category">
+      <h3 class="partner-cat-title">PG 협력사 <span class="count">5개사</span></h3>
+      <div class="partner-grid">
+        <div class="partner-item">키움페이</div>
+        <div class="partner-item">KG이니시스</div>
+        <div class="partner-item">토스페이먼츠</div>
+        <div class="partner-item">헥토파이낸셜</div>
+        <div class="partner-item">NICEPAY</div>
+      </div>
+    </div>
+
+    <div class="partner-category">
+      <h3 class="partner-cat-title">POS 협력사 <span class="count">4개사</span></h3>
+      <div class="partner-grid">
+        <div class="partner-item">OKPOS</div>
+        <div class="partner-item">POSBANK</div>
+        <div class="partner-item">METACITY</div>
+        <div class="partner-item">MagicPOS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="cta-section" id="contact">
   <div class="container">
     <div class="cta-box">
@@ -314,6 +377,21 @@
 <script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 10));
+  
+  // 모바일 메뉴 토글
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  navToggle?.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    navToggle.classList.toggle('active');
+  });
+  // 메뉴 링크 클릭 시 닫기
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      navToggle.classList.remove('active');
+    });
+  });
 </script>
 </body>
 </html>
